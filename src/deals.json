@@ -515,9 +515,41 @@
   ],
   "scope": "City of New Orleans (Orleans Parish), including the French Quarter, Marigny, Bywater, CBD, Warehouse District, Uptown, Garden District, Mid-City, Riverbend, Lakefront, Algiers and New Orleans East. Excludes Kenner, Metairie, Chalmette and every other suburb.",
   "checks": {
-    "ranAt": "2026-11-06",
+    "ranAt": "2026-11-10",
+    "area": "Orleans Parish only (no Kenner, Metairie, Chalmette or other suburbs)",
     "brokenLinks": [
       "dragos"
-    ]
+    ],
+    "outOfArea": [],
+    "changedPages": [],
+    "priceNotOnPage": [
+      "basin",
+      "salted-pearl"
+    ],
+    "unreadablePages": [
+      "acme",
+      "chemin",
+      "felix",
+      "mr-eds"
+    ],
+    "fingerprints": {
+      "basin": "0e08453cb79c2927",
+      "blue-crab": "923a3a775f2249de",
+      "bourbon-house": "051f75c4f4b615a3",
+      "cooter": "9c99e4a516eafefc",
+      "desire": "c6bdb3c2aa88a6e1",
+      "fives": "2986179c09c8175d",
+      "luke": "5596bdb2977aed50",
+      "marias": "84e116a50623cbff",
+      "mosquito": "31fe330eae91dc6d",
+      "otis": "69a9ab22ce10375c",
+      "pascal": "9e4873a34a6e80ee",
+      "peche": "1ec4aa448258eaa9",
+      "pigeon-whale": "923a3a775f2249de",
+      "salted-pearl": "36047d2dbe8ab3b3",
+      "seaworthy": "431df1b56d0d6be2",
+      "sidecar": "083ccf349858435a",
+      "superior": "996c53c7ec9ed2d7"
+    }
   }
 }
