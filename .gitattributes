@@ -1,0 +1,148 @@
+# Images are stored as ordinary Git files (not Git LFS) so deploys never hit LFS quotas.
+# Keep each file under 100 MB; compress big art before committing.
+# Git LFS Tracking Rules
+# Generated for binary, large, and non-diffable file types
+
+# ---------------------------------------------------------------------------
+# Images & Graphics
+# ---------------------------------------------------------------------------
+*.png                binary
+*.jpg                binary
+*.jpeg               binary
+*.gif                binary
+*.bmp                binary
+*.tiff               binary
+*.tif                binary
+*.ico                binary
+*.webp               binary
+*.psd                binary
+*.ai                 binary
+*.sketch             binary
+
+# ---------------------------------------------------------------------------
+# Video
+# ---------------------------------------------------------------------------
+*.mp4                binary
+*.mov                binary
+*.avi                binary
+*.mkv                binary
+*.wmv                binary
+*.flv                binary
+*.webm               binary
+*.m4v                binary
+*.mpg                binary
+*.mpeg               binary
+
+# ---------------------------------------------------------------------------
+# Audio
+# ---------------------------------------------------------------------------
+*.mp3                binary
+*.wav                binary
+*.flac               binary
+*.aac                binary
+*.ogg                binary
+*.m4a                binary
+*.wma                binary
+*.aiff               binary
+
+# ---------------------------------------------------------------------------
+# 3D & Game Assets
+# ---------------------------------------------------------------------------
+*.fbx                binary
+*.obj                binary
+*.blend              binary
+*.dae                binary
+*.3ds                binary
+*.max                binary
+*.unity              binary
+*.unitypackage       binary
+*.uasset             binary
+*.umap               binary
+
+# ---------------------------------------------------------------------------
+# Archives & Compressed Files
+# ---------------------------------------------------------------------------
+*.zip                binary
+*.tar                binary
+*.gz                 binary
+*.bz2                binary
+*.7z                 binary
+*.rar                binary
+*.tgz                binary
+
+# ---------------------------------------------------------------------------
+# Documents & Fonts
+# ---------------------------------------------------------------------------
+*.pdf                binary
+*.docx               binary
+*.xlsx               binary
+*.pptx               binary
+*.ttf                binary
+*.otf                binary
+*.woff               binary
+*.woff2              binary
+*.eot                binary
+
+# ---------------------------------------------------------------------------
+# Data & Machine Learning
+# ---------------------------------------------------------------------------
+*.parquet            binary
+*.hdf5               binary
+*.h5                 binary
+*.pkl                binary
+*.pickle             binary
+*.npy                binary
+*.npz                binary
+*.bin                binary
+*.pt                 binary
+*.pth                binary
+*.onnx               binary
+*.pb                 binary
+*.safetensors        binary
+*.gguf               binary
+
+# ---------------------------------------------------------------------------
+# Databases
+# ---------------------------------------------------------------------------
+*.db                 binary
+*.sqlite             binary
+*.sqlite3            binary
+*.mdb                binary
+*.accdb              binary
+
+# ---------------------------------------------------------------------------
+# Executables & Libraries
+# ---------------------------------------------------------------------------
+*.exe                binary
+*.dll                binary
+*.so                 binary
+*.dylib              binary
+*.a                  binary
+*.lib                binary
+*.wasm               binary
+
+# ---------------------------------------------------------------------------
+# Build Artifacts & Packages
+# ---------------------------------------------------------------------------
+*.jar                binary
+*.war                binary
+*.ear                binary
+*.apk                binary
+*.ipa                binary
+*.deb                binary
+*.rpm                binary
+*.dmg                binary
+*.iso                binary
+*.img                binary
+
+# ---------------------------------------------------------------------------
+# CAD & Scientific
+# ---------------------------------------------------------------------------
+*.dwg                binary
+*.dxf                binary
+*.step               binary
+*.stp                binary
+*.iges               binary
+*.stl                binary
+*.nc                 binary
+*.mat                binary

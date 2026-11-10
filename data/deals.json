@@ -1,0 +1,466 @@
+{
+  "updated": "2026-10-29",
+  "timezone": "America/Chicago",
+  "venues": [
+    {
+      "id": "bourbon-house",
+      "name": "Bourbon House",
+      "area": "French Quarter",
+      "address": "144 Bourbon St, New Orleans, LA",
+      "lat": 29.95361,
+      "lng": -90.06953,
+      "kind": [
+        "raw"
+      ],
+      "price": 1,
+      "unit": "each",
+      "deal": "$1 raw oysters on the half shell",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "14:00",
+      "end": "17:00",
+      "note": "Bar areas only",
+      "source": "https://www.bourbonhouse.com/menu/happy-hour/"
+    },
+    {
+      "id": "luke",
+      "name": "Luke",
+      "area": "CBD",
+      "address": "333 St Charles Ave, New Orleans, LA",
+      "lat": 29.95015,
+      "lng": -90.07043,
+      "kind": [
+        "raw",
+        "fried"
+      ],
+      "price": 1.5,
+      "unit": "each",
+      "deal": "$1.50 Gulf oysters; $3 specialty oysters",
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "start": "15:00",
+      "end": "18:00",
+      "note": "Half-price select drinks",
+      "source": "https://www.lukeneworleans.com/menu"
+    },
+    {
+      "id": "seaworthy",
+      "name": "Seaworthy",
+      "area": "CBD",
+      "address": "630 Carondelet St, New Orleans, LA",
+      "lat": 29.94688,
+      "lng": -90.07159,
+      "kind": [
+        "raw"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Half-off raw oysters; selection and final prices vary",
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "start": "16:00",
+      "end": "18:00",
+      "note": "Daily oyster selection changes",
+      "source": "https://seaworthynola.com/"
+    },
+    {
+      "id": "desire",
+      "name": "Desire Oyster Bar",
+      "area": "French Quarter",
+      "address": "300 Bourbon St, New Orleans, LA",
+      "lat": 29.95527,
+      "lng": -90.0682,
+      "kind": [
+        "raw",
+        "chargrilled"
+      ],
+      "price": 1.5,
+      "unit": "each",
+      "deal": "$1.50 raw oysters",
+      "days": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "start": "16:00",
+      "end": "18:00",
+      "note": "Monday through Thursday",
+      "source": "https://www.sonesta.com/royal-sonesta/la/new-orleans/royal-sonesta-new-orleans/desire-oyster-bar"
+    },
+    {
+      "id": "otis",
+      "name": "Otis",
+      "area": "French Quarter",
+      "address": "201 Chartres St, New Orleans, LA",
+      "lat": 29.95175,
+      "lng": -90.06595,
+      "kind": [
+        "raw"
+      ],
+      "price": 10,
+      "unit": "half-dozen",
+      "deal": "$10 for six oysters",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "15:00",
+      "end": "18:00",
+      "note": "Half-dozen deal; verify selection",
+      "source": "https://otisseafood.com/wine-and-cocktail-bar-new-orleans/"
+    },
+    {
+      "id": "acme",
+      "name": "Acme Oyster House",
+      "area": "French Quarter",
+      "address": "724 Iberville St, New Orleans, LA",
+      "kind": [
+        "raw",
+        "chargrilled",
+        "fried"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Oysters on the menu · regular pricing varies",
+      "days": [],
+      "start": null,
+      "end": null,
+      "note": "Oyster destination; no verified regular happy-hour deal",
+      "source": "https://acmeoyster.com/"
+    },
+    {
+      "id": "felix",
+      "name": "Felix's Restaurant & Oyster Bar",
+      "area": "French Quarter",
+      "address": "739 Iberville St, New Orleans, LA",
+      "kind": [
+        "raw",
+        "chargrilled",
+        "fried"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Oysters on the menu · regular pricing varies",
+      "days": [],
+      "start": null,
+      "end": null,
+      "note": "Oyster destination; no verified regular happy-hour deal",
+      "source": "https://felixs.com/"
+    },
+    {
+      "id": "mr-eds",
+      "name": "Mr. Ed's Oyster Bar",
+      "area": "French Quarter",
+      "address": "512 Bienville St, New Orleans, LA",
+      "kind": [
+        "raw",
+        "chargrilled",
+        "fried"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Oysters on the menu · regular pricing varies",
+      "days": [],
+      "start": null,
+      "end": null,
+      "note": "Oyster destination; no verified regular happy-hour deal",
+      "source": "https://mredsrestaurants.com/"
+    },
+    {
+      "id": "fives",
+      "name": "Fives",
+      "area": "French Quarter",
+      "address": "529 St Ann St, New Orleans, LA",
+      "kind": [
+        "raw"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Oysters on the menu · regular pricing varies",
+      "days": [],
+      "start": null,
+      "end": null,
+      "note": "Oyster destination; no verified regular happy-hour deal",
+      "source": "https://fives.bar/"
+    },
+    {
+      "id": "dragos",
+      "name": "Drago's Seafood Restaurant",
+      "area": "CBD",
+      "address": "2 Poydras St, New Orleans, LA",
+      "kind": [
+        "chargrilled",
+        "raw"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Oysters on the menu · regular pricing varies",
+      "days": [],
+      "start": null,
+      "end": null,
+      "note": "Oyster destination; no verified regular happy-hour deal",
+      "source": "https://www.dragosrestaurant.com/"
+    },
+    {
+      "id": "peche",
+      "name": "Pêche Seafood Grill",
+      "area": "Warehouse District",
+      "address": "800 Magazine St, New Orleans, LA",
+      "kind": [
+        "raw",
+        "roasted"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Oysters on the menu · regular pricing varies",
+      "days": [],
+      "start": null,
+      "end": null,
+      "note": "Oyster destination; no verified regular happy-hour deal",
+      "source": "https://www.pecherestaurant.com/"
+    },
+    {
+      "id": "sidecar",
+      "name": "Sidecar Patio & Oyster Bar",
+      "area": "Warehouse District",
+      "address": "1114 Constance St, New Orleans, LA",
+      "kind": [
+        "raw"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Oysters on the menu · regular pricing varies",
+      "days": [],
+      "start": null,
+      "end": null,
+      "note": "Oyster destination; no verified regular happy-hour deal",
+      "source": "https://sidecarnola.com/"
+    },
+    {
+      "id": "marias",
+      "name": "Maria's Oyster & Wine Bar",
+      "area": "Warehouse District",
+      "address": "752 Tchoupitoulas St, New Orleans, LA",
+      "kind": [
+        "raw",
+        "roasted"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Oysters on the menu · regular pricing varies",
+      "days": [],
+      "start": null,
+      "end": null,
+      "note": "Oyster destination; no verified regular happy-hour deal",
+      "source": "https://www.mariasoysterbar.com/"
+    },
+    {
+      "id": "basin",
+      "name": "Basin Seafood & Spirits",
+      "area": "Garden District",
+      "address": "3222 Magazine St, New Orleans, LA",
+      "kind": [
+        "raw",
+        "chargrilled"
+      ],
+      "price": 0.75,
+      "unit": "each",
+      "deal": "75¢ raw oysters with menu-item purchase (Monday special)",
+      "days": [
+        1
+      ],
+      "start": "11:00",
+      "end": "21:00",
+      "note": "Published special; confirm before visiting",
+      "source": "https://www.basinneworleans.com/"
+    },
+    {
+      "id": "superior",
+      "name": "Superior Seafood & Oyster Bar",
+      "area": "Uptown",
+      "address": "4338 St Charles Ave, New Orleans, LA",
+      "kind": [
+        "raw",
+        "chargrilled"
+      ],
+      "price": 7.5,
+      "unit": "half-dozen",
+      "deal": "$7.50 raw half dozen at happy hour",
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "start": "16:00",
+      "end": "18:30",
+      "note": "Published special; confirm before visiting",
+      "source": "https://superiorseafoodnola.com/"
+    },
+    {
+      "id": "salted-pearl",
+      "name": "The Salted Pearl at St Roch Market",
+      "area": "St. Roch",
+      "address": "2381 St Claude Ave, New Orleans, LA",
+      "kind": [
+        "raw"
+      ],
+      "price": 1,
+      "unit": "each",
+      "deal": "$1 oysters at St Roch Market",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "start": "15:00",
+      "end": "17:00",
+      "note": "Published special; confirm before visiting",
+      "source": "https://www.strochmarket.com/"
+    },
+    {
+      "id": "pigeon-whale",
+      "name": "Pigeon and Whale",
+      "area": "Freret",
+      "address": "4525 Freret St, New Orleans, LA",
+      "kind": [
+        "raw"
+      ],
+      "price": 2,
+      "unit": "each",
+      "deal": "$2 oysters at happy hour",
+      "days": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "start": "16:00",
+      "end": "18:00",
+      "note": "Published special; confirm before visiting",
+      "source": "https://nola.eater.com/maps/best-raw-oyster-happy-hour-new-orleans-nola"
+    },
+    {
+      "id": "cooter",
+      "name": "Cooter Brown's Tavern",
+      "area": "Riverbend",
+      "address": "509 S Carrollton Ave, New Orleans, LA",
+      "kind": [
+        "raw"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Oysters on the menu · regular pricing varies",
+      "days": [],
+      "start": null,
+      "end": null,
+      "note": "Oyster destination; no verified regular happy-hour deal",
+      "source": "https://www.cooterbrowns.com/"
+    },
+    {
+      "id": "blue-crab",
+      "name": "The Blue Crab",
+      "area": "Lakefront",
+      "address": "7900 Lakeshore Dr, New Orleans, LA",
+      "kind": [
+        "raw",
+        "chargrilled"
+      ],
+      "price": 1,
+      "unit": "each",
+      "deal": "$1 raw oysters during happy hour",
+      "days": [
+        2,
+        3,
+        4
+      ],
+      "start": "16:00",
+      "end": "18:30",
+      "note": "Published special; confirm before visiting",
+      "source": "https://nola.eater.com/maps/best-raw-oyster-happy-hour-new-orleans-nola"
+    },
+    {
+      "id": "mosquito",
+      "name": "Mosquito Supper Club",
+      "area": "Uptown",
+      "address": "3824 Dryades St, New Orleans, LA",
+      "kind": [
+        "raw"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Oysters on the menu · regular pricing varies",
+      "days": [],
+      "start": null,
+      "end": null,
+      "note": "Oyster destination; no verified regular happy-hour deal",
+      "source": "https://www.mosquitosupperclub.com/"
+    },
+    {
+      "id": "chemin",
+      "name": "Chemin à la Mer",
+      "area": "CBD",
+      "address": "2 Canal St, New Orleans, LA",
+      "kind": [
+        "raw"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Oysters on the menu · regular pricing varies",
+      "days": [],
+      "start": null,
+      "end": null,
+      "note": "Oyster destination; no verified regular happy-hour deal",
+      "source": "https://www.fourseasons.com/neworleans/dining/restaurants/chemin-a-la-mer/"
+    },
+    {
+      "id": "pascal",
+      "name": "Pascal's Manale",
+      "area": "Uptown",
+      "address": "1838 Napoleon Ave, New Orleans, LA",
+      "kind": [
+        "raw"
+      ],
+      "price": null,
+      "unit": "variable",
+      "deal": "Oysters on the menu · regular pricing varies",
+      "days": [],
+      "start": null,
+      "end": null,
+      "note": "Oyster destination; no verified regular happy-hour deal",
+      "source": "https://www.pascalsmanale.com/"
+    }
+  ],
+  "scope": "New Orleans city, including French Quarter, CBD, Warehouse District, Uptown, Garden District, Marigny, Bywater, Mid-City, Riverbend, and Lakefront; exclude Kenner, Metairie and other surrounding suburbs."
+}

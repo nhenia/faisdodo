@@ -1,0 +1,74 @@
+name: Deploy Fais DoDo web PWA
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "public/**"
+      - "index.html"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "vite.config.ts"
+      - ".figma/**"
+      - ".gitattributes"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Verify binary assets
+        run: |
+          git lfs pull
+          test -s public/art/oyster-wall.png
+          test -s public/icons/icon-192.png
+          if head -c 7 public/art/oyster-wall.png | grep -q version; then echo 'Image still an LFS pointer'; exit 1; fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '10'
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+      - name: Build React PWA for project URL
+        env:
+          FIGMA_PUBLIC_URL: /faisdodo
+        run: pnpm build
+      - name: Verify build
+        run: |
+          test -s dist/index.html
+          test -s dist/art/oyster-wall.png
+          test -s dist/manifest.webmanifest
+          test -s dist/sw.js
+          for file in dist/art/*.{jpg,png} dist/art/animations/*.webp dist/icons/*.png; do
+            test -s "$file" || { echo "Missing asset: $file"; exit 1; }
+            if head -c 40 "$file" | grep -q 'git-lfs.github.com/spec'; then
+              echo "LFS pointer instead of image: $file"; exit 1
+            fi
+          done
+          if grep -Rq 'url(/art/' dist/assets/; then
+            echo "Unscoped background image URL in compiled CSS"; exit 1
+          fi
+          touch dist/.nojekyll
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - uses: actions/deploy-pages@v4
+        id: deployment

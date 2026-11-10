@@ -1,0 +1,29 @@
+{
+  "name": "Fais DoDo — New Orleans Happy Hours",
+  "short_name": "Fais DoDo",
+  "description": "Every happy hour in New Orleans, right now.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#11100e",
+  "theme_color": "#11100e",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "scope": "./",
+  "id": "./",
+  "categories": [
+    "food",
+    "travel"
+  ]
+}

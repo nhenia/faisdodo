@@ -1,0 +1,90 @@
+name: Happy hour data robot
+# Keeps Fais DoDo's map honest. Twice a week (and whenever src/deals.json changes) it:
+#   - maps any venue that's missing coordinates
+#   - FENCES the list to Orleans Parish: Kenner, Metairie, Chalmette and every other suburb fail the run
+#   - checks every source link still loads
+#   - fingerprints each happy-hour page and flags the ones whose prices/times changed
+#   - looks for each venue's listed price on its own page
+# and posts a "Happy hours to re-check" GitHub issue as a checklist for a human.
+# It never edits prices, deals, days or times — those stay human-verified.
+on:
+  schedule:
+    - cron: "17 13 * * 1" # Mondays, ~7-8am New Orleans time (before the week's specials start)
+    - cron: "17 19 * * 4" # Thursdays, ~1-2pm (before weekend happy hours)
+  workflow_dispatch:
+  push:
+    branches: [main, "feature/**"]
+    paths:
+      - "src/deals.json"
+      - "scripts/refresh-data.mjs"
+      - "src/finder/logic.test.ts"
+      - ".github/workflows/refresh-data.yml"
+permissions:
+  contents: write # commit refreshed coordinates/checks
+  issues: write # post the re-check list
+  actions: write # redeploy the site after a data change
+concurrency:
+  group: refresh-data-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Map, fence, check links and watch specials pages
+        run: node scripts/refresh-data.mjs
+
+      - name: Validate data
+        run: node --test src/finder/logic.test.ts
+
+      - name: Commit updated data
+        id: commit
+        run: |
+          if git diff --quiet src/deals.json; then
+            echo "No data changes."
+            exit 0
+          fi
+          git config user.name "faisdodo-data-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/deals.json
+          git commit -m "data: refresh coordinates and happy hour checks"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # Commits made by this bot don't trigger other workflows, so redeploy the live site explicitly.
+      - name: Redeploy site
+        if: steps.commit.outputs.changed == 'true' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-pages.yml --ref main
+
+      # One open issue at a time: updated in place, closed automatically when the list is empty.
+      - name: Post "Happy hours to re-check" issue
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: Happy hours to re-check
+        run: |
+          number=$(gh issue list --state open --search "in:title \"$TITLE\"" --json number,title \
+            --jq "map(select(.title == \"$TITLE\")) | .[0].number // empty")
+          if [ -s recheck.md ]; then
+            if [ -n "$number" ]; then gh issue edit "$number" --body-file recheck.md
+            else gh issue create --title "$TITLE" --body-file recheck.md; fi
+          elif [ -n "$number" ]; then
+            gh issue close "$number" --comment "Robot run $(date -u +%F): nothing left to re-check."
+          fi
+
+      - name: Enforce the New Orleans-only rule
+        run: |
+          node -e '
+            const out = require("./src/deals.json").checks?.outOfArea ?? []
+            if (out.length) {
+              console.error("Outside Orleans Parish — remove from src/deals.json:\n- " + out.join("\n- "))
+              process.exit(1)
+            }
+            console.log("All venues are inside New Orleans (Orleans Parish).")
+          '

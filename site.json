@@ -1,0 +1,10 @@
+{
+  "description": "A progressive web app showcasing interactive artwork with engaging animations, offering visitors an immersive visual experience across devices.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
