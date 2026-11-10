@@ -99,7 +99,7 @@ pnpm refresh-data     # run the data robot locally (needs internet)
 - Stack: React 19 + Vite 8 + Tailwind 4, Leaflet for the map. A static web app (PWA) on GitHub Pages. No server, no accounts, no keys.
 - Finder code: `src/finder/`. `logic.ts` holds every rule and is tested; plus `location.ts`, `OysterMap.tsx`, `OysterFinder.tsx`, `finder.css`.
 - External services, all free and keyless: CARTO map tiles, Photon address search, Google Maps for directions, US Census geocoder.
-- Images are stored with Git LFS (large-file storage). The deploy fails on purpose if any image arrives as a placeholder.
+- Images are ordinary Git files (Moyster uses Git LFS; Fais DoDo dropped it so deploys never hit LFS download limits). Keep each image under 100 MB. The deploy still fails on purpose if an image ever arrives as a placeholder.
 - `.github/workflows/deploy-pages.yml` builds for the `/faisdodo` address and publishes on every push to `main`.
 - Left over from Moyster and safe to ignore: `composeApp/` (an older Kotlin version), `.figma/` and the duplicate files at the top level (Figma Make leftovers). Moyster's raw oyster design scrapbook (`assets/moyster-session/`, 208 MB) was deliberately not copied.
 
