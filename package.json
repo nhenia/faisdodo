@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "format": "oxfmt",
-    "test": "node --test src/finder/logic.test.ts",
+    "test": "node --test src/finder/logic.test.ts scripts/chalkboard.test.mjs",
     "typecheck": "tsc --noEmit -p .",
     "refresh-data": "node scripts/refresh-data.mjs"
   },

@@ -23,3 +23,5 @@ test-screenshots/
 
 # robot output (posted as a GitHub issue, not committed)
 recheck.md
+chalkboard-result.md
+test.log

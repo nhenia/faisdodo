@@ -9,6 +9,10 @@ Base: cloned from Moyster `feature/finder-v2` on 2026-11-10 (engine identical; s
 - [x] README
 - [x] Happy hour data robot: map, Orleans-Parish fence, link check, specials-page fingerprints, price check, "Happy hours to re-check" issue
 - [x] Verified: type-check, 9/9 unit tests, build, deploy asset checks, 23/23 browser checks, robot dry-run against a fake internet
+- [x] Chalkboard bounty: text-a-photo inbox (Cloudflare Worker), reading with Claude, auto-publish for registered bartenders, pull request otherwise
+  - Verified: 8 rule tests, signature check matches Twilio's official library, 6 end-to-end scenarios with a fake internet, actionlint clean
+  - Not yet live: needs the secrets and accounts in chalkboard/SETUP.md
+- [ ] Show the board photo in each bar's details sheet (data is already there: `board`)
 
 ## Next (reskin)
 - [ ] Final name + visual concept

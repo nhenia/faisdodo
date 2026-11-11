@@ -1,0 +1,120 @@
+name: Chalkboard bounty
+# A bartender texts a photo of their specials board → this reads it and updates src/deals.json.
+#   Registered number + clean reading  → goes live right away (and the site redeploys)
+#   Anything else                      → a pull request for a human to approve
+#   Unknown bar / unreadable photo     → a GitHub issue, plus a helpful text back
+# Texts arrive through the Cloudflare Worker in chalkboard/worker.js. Setup: chalkboard/SETUP.md
+# You can also run it by hand (Actions → Chalkboard bounty → Run workflow) with any photo link,
+# e.g. a menu photo from Instagram.
+on:
+  repository_dispatch:
+    types: [chalkboard]
+  workflow_dispatch:
+    inputs:
+      image_url:
+        description: "Link to the photo (must be a direct image link)"
+        required: true
+      venue:
+        description: "Bar id from src/deals.json, e.g. luke (leave blank to let it work it out)"
+        required: false
+      publish:
+        description: "Publish straight away if every check passes (otherwise always a pull request)"
+        type: boolean
+        default: false
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  actions: write
+concurrency:
+  group: chalkboard # one board at a time, so two updates never collide
+  cancel-in-progress: false
+jobs:
+  read-board:
+    runs-on: ubuntu-latest
+    env:
+      FROM: ${{ github.event.client_payload.from }}
+      BODY: ${{ github.event.client_payload.body }}
+      MEDIA_URLS: ${{ github.event.client_payload.media }}
+      IMAGE_URL: ${{ github.event.inputs.image_url }}
+      VENUE_ID: ${{ github.event.inputs.venue }}
+      TRUST_MANUAL: ${{ github.event.inputs.publish }}
+    steps:
+      - name: Hide the sender's phone number from the logs
+        run: '[ -n "$FROM" ] && echo "::add-mask::$FROM" || true'
+
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Read the board
+        id: read
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BARTENDER_ROSTER: ${{ secrets.BARTENDER_ROSTER }}
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          CHALKBOARD_MODEL: ${{ vars.CHALKBOARD_MODEL }}
+          AUTO_PUBLISH: ${{ vars.AUTO_PUBLISH }}
+        run: node scripts/chalkboard.mjs
+
+      # The app's own data rules. If the update breaks them, it never goes live on its own.
+      - name: Validate updated data
+        id: validate
+        if: steps.read.outputs.status == 'published' || steps.read.outputs.status == 'review'
+        run: |
+          if node --test src/finder/logic.test.ts > test.log 2>&1; then
+            echo "status=${{ steps.read.outputs.status }}" >> "$GITHUB_OUTPUT"
+          else
+            tail -30 test.log
+            printf '\n### ⚠️ The data checks failed with this update\n```\n%s\n```\n' "$(grep -E 'not ok|Error' test.log | head -10)" >> chalkboard-result.md
+            echo "status=review" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish
+        if: steps.validate.outputs.status == 'published'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: ${{ steps.read.outputs.title }}
+        run: |
+          git config user.name "faisdodo-chalkboard-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/deals.json public/boards
+          { echo "$TITLE"; echo; cat chalkboard-result.md; } | git commit -F -
+          git pull --rebase origin main && git push origin HEAD:main
+          gh workflow run deploy-pages.yml --ref main
+
+      - name: Open a pull request for review
+        if: steps.validate.outputs.status == 'review'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: ${{ steps.read.outputs.title }}
+          BRANCH: ${{ steps.read.outputs.branch }}
+        run: |
+          git config user.name "faisdodo-chalkboard-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git add src/deals.json public/boards
+          { echo "$TITLE"; echo; cat chalkboard-result.md; } | git commit -F -
+          git push origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" --title "$TITLE" --body-file chalkboard-result.md
+
+      - name: Flag for a human
+        if: steps.read.outputs.status == 'unknown' || steps.read.outputs.status == 'failed'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue create --title "Chalkboard needs a human ($(date -u +%F))" --body-file chalkboard-result.md
+
+      - name: Text the bartender back
+        if: always() && env.FROM != '' && steps.read.outputs.reply != ''
+        env:
+          SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          NUMBER: ${{ secrets.TWILIO_NUMBER }}
+          REPLY: ${{ steps.validate.outputs.status == 'review' && steps.read.outputs.status == 'published' && format('Got it! A human will double-check {0}''s new specials and publish them shortly. Thank you!', steps.read.outputs.venue_name) || steps.read.outputs.reply }}
+        run: |
+          if [ -z "$SID" ] || [ -z "$NUMBER" ]; then echo "Twilio not set up; skipping reply."; exit 0; fi
+          curl -sS --fail-with-body -u "$SID:$TOKEN" "https://api.twilio.com/2010-04-01/Accounts/$SID/Messages.json" \
+            --data-urlencode "From=$NUMBER" --data-urlencode "To=$FROM" --data-urlencode "Body=$REPLY" -o /dev/null
+          echo "Replied."

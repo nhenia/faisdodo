@@ -197,7 +197,9 @@ await Promise.all(
     if (!print) return report.unreadable.push(venue.id) // PDF menu, image menu or JavaScript-only page
     fingerprints[venue.id] = print
     if (before[venue.id] && before[venue.id] !== print) report.changed.push(venue.id)
-    if (priceOnPage(venue.price, text) === false) report.priceMissing.push(venue.id)
+    // A board photo from the last 30 days outranks the website, which is often the stale one.
+    const boardIsFresh = venue.board && venue.verified && Date.now() - Date.parse(venue.verified) < 30 * 864e5
+    if (!boardIsFresh && priceOnPage(venue.price, text) === false) report.priceMissing.push(venue.id)
   }),
 )
 

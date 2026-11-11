@@ -84,12 +84,26 @@ It then commits the coordinates and checks, redeploys the site, and keeps one Gi
 
 What it can't read: menus that are PDFs, photos, or built entirely in JavaScript. Those get listed as "no readable prices" so you know to check them by eye.
 
+## Chalkboard bounty (bartenders text a photo)
+
+The freshest happy hour info isn't on a bar's website. It's on the board behind the bar. So bartenders can text a photo of it to the Fais DoDo number:
+
+1. Claude reads every special, day and time on the board.
+2. The reading is checked: are the times real, is the price sane, is it the right bar, is anything smudged?
+3. **Registered bartender and a clean reading** → the bar is updated on the map within minutes, marked as checked today, and the photo is saved as proof (`public/boards/<bar>/`).
+4. **Anything doubtful, or a sender you haven't registered** → a pull request: the exact changes in plain words, with the photo attached, for you to OK with one click.
+5. The bartender gets a text back either way.
+
+You can also run it by hand with any photo link (GitHub → Actions → *Chalkboard bounty* → *Run workflow*), handy for a menu photo someone posts on Instagram.
+
+Files: `.github/workflows/chalkboard.yml`, `scripts/chalkboard.mjs` (does the work), `scripts/chalkboard-lib.mjs` (the rules, tested), `chalkboard/worker.js` (the text inbox). **Setup, costs and safety rules: [`chalkboard/SETUP.md`](chalkboard/SETUP.md).**
+
 ## For developers
 
 ```bash
 pnpm install
 pnpm dev              # local server
-pnpm test             # finder logic + data validation (Node test runner)
+pnpm test             # finder logic, data validation and chalkboard rules (Node test runner)
 pnpm typecheck
 pnpm build && pnpm preview --port 4173
 python3 tests/e2e.py  # browser tests at phone + desktop sizes (needs Python Playwright)
