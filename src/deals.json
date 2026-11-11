@@ -515,7 +515,7 @@
   ],
   "scope": "City of New Orleans (Orleans Parish), including the French Quarter, Marigny, Bywater, CBD, Warehouse District, Uptown, Garden District, Mid-City, Riverbend, Lakefront, Algiers and New Orleans East. Excludes Kenner, Metairie, Chalmette and every other suburb.",
   "checks": {
-    "ranAt": "2026-11-10",
+    "ranAt": "2026-11-11",
     "area": "Orleans Parish only (no Kenner, Metairie, Chalmette or other suburbs)",
     "brokenLinks": [
       "dragos"
